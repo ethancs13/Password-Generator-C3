@@ -7,18 +7,23 @@ var generateBtn = document.querySelector("#generate");
 var passwordText = document.querySelector("#password");
 
 function writePassword() {
-
+  // Initial ask to continue with process
   if (confirm("Welcome to Password Generator" + "\n"
               + "  Ok --> Yes     |     Cancel --> No "
               + "\n\n" + "Would you like to continue?")){
 
+    // Initialize set of acceptable characters
     var newChars = "";
-  
+    
+    // Store length of password  :  given by user input
     var length = prompt("Enter a length for your password [8-128]" + "\n" + ":leave blank to exit.")
   
+
+    // Check to see if length is between 8 and 128  :  otherwise return
     if(length > 7 && length < 129){var lengthChecked = length;}else{return}
 
 
+    // If statement block for what characters will be included in the password
     if (confirm("You will now select which character types" + "\n" + " will be included in your password.")){
 
       if (confirm("Include Lower Case?")){
@@ -38,16 +43,27 @@ function writePassword() {
       } else {}
     }
 
+    // function to create password
     function generatePassword() {
+      
+      // Initialize password variable
       var password = "";
 
+      // select random character from newChars
+      // add to end of password string
+
       for (var i = 0; i <= lengthChecked; i++) {
+
+        // Get random index based on length of newChars
         var randomNumber = Math.floor(Math.random() * newChars.length)
-        password += newChars.substring(randomNumber, randomNumber +1)
+        // add
+        password += newChars[randomNumber]
       }
+      // Set password to the index file text
       passwordText.textContent = password
     }
 
+    // Call the generate password function after asking questions
     var password = generatePassword()
   }
 
