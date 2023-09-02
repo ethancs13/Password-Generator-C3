@@ -7,48 +7,51 @@ var generateBtn = document.querySelector("#generate");
 var passwordText = document.querySelector("#password");
 
 function writePassword() {
-  var password = generatePassword();
+
+  if (confirm("Welcome to Password Generator" + "\n"
+              + "  Ok --> Yes     |     Cancel --> No "
+              + "\n\n" + "Would you like to continue?")){
+
+    var newChars = "";
   
+    var length = prompt("Enter a length for your password [8-128]" + "\n" + ":leave blank to exit.")
+  
+    if(length > 7 && length < 129){var lengthChecked = length;}else{return}
 
 
-if (confirm("Select your criteria")){
+    if (confirm("You will now select which character types" + "\n" + " will be included in your password.")){
 
-  var newChars = "";
-
-  var length = prompt("Enter Length [8-128] or Nothing")
-
-  if(length > 7 && length < 129){
-    var lengthChecked = length;
-  }
-
-  let charFunc = () => {
-    if (confirm("Would you like to exclude any characters?")){
       if (confirm("Include Lower Case?")){
         newChars += "abcdefghijklmnopqrstuvwxyz"
       } else {}
+
       if (confirm("Include Upper Case")){
         newChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       } else {}
+
       if (confirm("Include Numbers?")){
         newChars += "0123456789"
       } else {}
+
       if (confirm("Include Special Characters?")){
         newChars += "!@#$%^&*()"
       } else {}
     }
-  }
 
-  charFunc()
-  // if (!newChars == 0){
+    function generatePassword() {
       var password = "";
 
       for (var i = 0; i <= lengthChecked; i++) {
-        var randomNumber = Math.floor(Math.random() * newChars.length);
-        password += newChars.substring(randomNumber, randomNumber +1);
+        var randomNumber = Math.floor(Math.random() * newChars.length)
+        password += newChars.substring(randomNumber, randomNumber +1)
       }
-      alert(password)
       passwordText.textContent = password
+    }
+
+    var password = generatePassword()
   }
+
+      
 }
 
 // Add event listener to generate button
