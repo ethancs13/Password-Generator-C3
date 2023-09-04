@@ -27,7 +27,9 @@ function writePassword() {
     if (confirm("You will now select which character types" + "\n" + " will be included in your password.")){
 
       if (confirm("Include Lower Case?")){
-        newChars += "abcdefghijklmnopqrstuvwxyz"
+
+        // add characters to string
+        (newChars) += "abcdefghijklmnopqrstuvwxyz"
       } else {}
 
       if (confirm("Include Upper Case")){
@@ -55,16 +57,23 @@ function writePassword() {
       for (var i = 0; i <= lengthChecked; i++) {
 
         // Get random index based on length of newChars
-        var randomNumber = Math.floor(Math.random() * newChars.length)
+        var randomNumber = Math.floor(Math.random() * (newChars.length))
         // add
         password += newChars[randomNumber]
       }
       // Set password to the index file text
+console.log(newChars)
+
       passwordText.textContent = password
     }
 
-    // Call the generate password function after asking questions
+    // Call the generate password function after asking questions if atleast one option is selected
+    if (newChars == ""){
+      passwordText.textContent = "must select one option"
+      return
+    } else {
     var password = generatePassword()
+    }
   }
 
       
